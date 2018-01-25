@@ -17,8 +17,9 @@ email                : kelly.thorp@ars.usda.gov
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import absolute_import
 
 def classFactory(iface): 
     # load CroppingSystemDDS class from file CroppingSystemDDS
-    from HTPGeoprocessor import HTPGeoprocessor 
+    from .HTPGeoprocessor import HTPGeoprocessor 
     return HTPGeoprocessor(iface)

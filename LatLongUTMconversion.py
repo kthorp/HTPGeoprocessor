@@ -2,6 +2,7 @@
 
 # Lat Long - UTM, UTM - Lat Long conversions
 
+from __future__ import print_function
 from math import pi, sin, cos, tan, sqrt
 
 #LatLong- UTM conversion..h
@@ -212,6 +213,8 @@ def UTMtoLL(ReferenceEllipsoid, northing, easting, zone):
    
 if __name__ == '__main__':
     (z, e, n) = LLtoUTM(23, 45.00, -75.00)
-    print z, e, n
-    print UTMtoLL(23, e, n, z)
+    # fix_print_with_import
+    print(z, e, n)
+    # fix_print_with_import
+    print(UTMtoLL(23, e, n, z))
 

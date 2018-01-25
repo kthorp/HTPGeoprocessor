@@ -3,12 +3,15 @@ Created on Feb 25, 2014
 
 @author: kthorp
 '''
+from __future__ import absolute_import
+from builtins import str
+from builtins import range
 import os
-from PyQt4.QtCore import pyqtSignature, QFileInfo, Qt, QVariant
-from PyQt4.QtGui import QDialog, QFileDialog, QApplication, QMessageBox 
+from qgis.PyQt.QtCore import QFileInfo, Qt, QVariant
+from qgis.PyQt.QtWidgets import QDialog, QFileDialog, QApplication, QMessageBox 
 from qgis.core import QgsVectorLayer, QgsGeometry, QgsField, QgsFields, QgsPoint
 from qgis.core import QgsFeature, QgsVectorFileWriter
-from Ui_MapCreatorDlg import Ui_MapCreatorDlg
+from .Ui_MapCreatorDlg import Ui_MapCreatorDlg
 
 class MapCreatorDlg(QDialog): 
     def __init__(self, iface): 
@@ -24,7 +27,7 @@ class MapCreatorDlg(QDialog):
 
     @pyqtSignature("on_btnBrowse1_clicked()")
     def on_btnBrowse1_clicked(self):            
-        f = QFileDialog.getOpenFileName(self,
+        f, __ = QFileDialog.getOpenFileName(self,
                                         'Select Input Coordinate File:',
                                         os.getcwd(),
                                         '*.csv') 
@@ -40,7 +43,7 @@ class MapCreatorDlg(QDialog):
 
     @pyqtSignature("on_btnBrowse2_clicked()")
     def on_btnBrowse2_clicked(self):                   
-        f = QFileDialog.getSaveFileName(self,
+        f, __ = QFileDialog.getSaveFileName(self,
                                         'Specify Output Shapefile:',
                                         os.getcwd(),
                                         '*.shp') 

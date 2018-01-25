@@ -16,20 +16,22 @@ email                : kelly.thorp@ars.usda.gov
  *                                                                         *
  ***************************************************************************/
 """
+from __future__ import absolute_import
 # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from qgis.core import *
+from builtins import object
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction, QMessageBox
 # Initialize Qt resources from file resources.py
-import resources
+from . import resources
 import os
 import sys
 # Import the code for the dialogs
-from MapCreatorDlg import MapCreatorDlg
-from GeoprocessorDlg import GeoprocessorDlg
-from PreprocessorDlg import PreprocessorDlg
+from .MapCreatorDlg import MapCreatorDlg
+from .GeoprocessorDlg import GeoprocessorDlg
+from .PreprocessorDlg import PreprocessorDlg
 
-class HTPGeoprocessor: 
+class HTPGeoprocessor(object): 
 
     def __init__(self, iface):
         # Save reference to the QGIS interface

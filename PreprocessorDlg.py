@@ -3,12 +3,15 @@ Created on Mar 22, 2012
 
 @author: kthorp
 '''
+from __future__ import absolute_import
+from builtins import str
+from builtins import range
 import os
 import math
-import LatLongUTMconversion
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from Ui_PreprocessorDlg import Ui_PreprocessorDlg
+from . import LatLongUTMconversion
+from qgis.PyQt.QtCore import Qt
+from qgis.PyQt.QtWidgets import QDialog, QTableWidgetItem, QFileDialog, QMessageBox
+from .Ui_PreprocessorDlg import Ui_PreprocessorDlg
 
 class PreprocessorDlg(QDialog): 
     def __init__(self): 
@@ -28,7 +31,7 @@ class PreprocessorDlg(QDialog):
 
     @pyqtSignature("on_btnLoad_clicked()")
     def on_btnLoad_clicked(self):
-        file = QFileDialog.getOpenFileName(self,
+        file, __ = QFileDialog.getOpenFileName(self,
                                            'Load Instruction File:',
                                            os.getcwd(),
                                            '*.csv')
@@ -74,7 +77,7 @@ class PreprocessorDlg(QDialog):
                    
     @pyqtSignature("on_btnSave_clicked()")
     def on_btnSave_clicked(self):
-        file = QFileDialog.getSaveFileName(self,
+        file, __ = QFileDialog.getSaveFileName(self,
                                            'Save Instruction File:',
                                            os.getcwd(),
                                            '*.csv')
@@ -121,7 +124,7 @@ class PreprocessorDlg(QDialog):
         self.ui.progressBar.setValue(0)
         
         #Open file and split data by commas
-        filename = QFileDialog.getOpenFileName(self,
+        filename, __ = QFileDialog.getOpenFileName(self,
                                                'Open Sensor Data File',
                                                os.getcwd(),
                                                '*.csv')
