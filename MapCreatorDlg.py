@@ -7,7 +7,7 @@ from __future__ import absolute_import
 from builtins import str
 from builtins import range
 import os
-from qgis.PyQt.QtCore import QFileInfo, Qt, QVariant
+from qgis.PyQt.QtCore import QFileInfo, Qt, QVariant, pyqtSlot
 from qgis.PyQt.QtWidgets import QDialog, QFileDialog, QApplication, QMessageBox 
 from qgis.core import QgsVectorLayer, QgsGeometry, QgsField, QgsFields, QgsPoint
 from qgis.core import QgsFeature, QgsVectorFileWriter
@@ -25,7 +25,7 @@ class MapCreatorDlg(QDialog):
         self.inputfile = ''
         self.outputfile = ''
 
-    @pyqtSignature("on_btnBrowse1_clicked()")
+    @pyqtSlot()
     def on_btnBrowse1_clicked(self):            
         f, __ = QFileDialog.getOpenFileName(self,
                                         'Select Input Coordinate File:',
@@ -37,11 +37,11 @@ class MapCreatorDlg(QDialog):
             self.ui.tbxInput.setText(self.inputfile)
             os.chdir(os.path.dirname(str(f)))
         
-    @pyqtSignature("on_tbxInput_textEdited(QString)")
+    @pyqtSlot()
     def on_tbxInput_textEdited(self):
         self.inputfile = self.ui.tbxInput.text() 
 
-    @pyqtSignature("on_btnBrowse2_clicked()")
+    @pyqtSlot()
     def on_btnBrowse2_clicked(self):                   
         f, __ = QFileDialog.getSaveFileName(self,
                                         'Specify Output Shapefile:',
@@ -53,7 +53,7 @@ class MapCreatorDlg(QDialog):
             self.ui.tbxOutput.setText(self.outputfile)
             os.chdir(os.path.dirname(str(f)))
         
-    @pyqtSignature("on_tbxOutput_textEdited(QString)")
+    @pyqtSlot()
     def on_tbxOutput_textEdited(self):
         if os.path.exists(self.ui.tbxOutput.text()):
             f = os.path.basename(str(self.ui.tbxOutput.text())) 
@@ -68,7 +68,7 @@ class MapCreatorDlg(QDialog):
             else:
                 self.ui.tbxOutput.setText(self.outputfile)
 
-    @pyqtSignature("on_btnRun_clicked()")
+    @pyqtSlot()
     def on_btnRun_clicked(self):
                 
         if self.inputfile == '':
@@ -147,6 +147,6 @@ class MapCreatorDlg(QDialog):
                 
         self.setCursor(Qt.ArrowCursor)
     
-    @pyqtSignature("on_btnExit_clicked()")
+    @pyqtSlot()
     def on_btnExit_clicked(self):
         self.close()

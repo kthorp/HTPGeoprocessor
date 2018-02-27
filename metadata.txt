@@ -10,9 +10,9 @@
 
 [general]
 name=HTP Geoprocessor
-qgisMinimumVersion=2.0
+qgisMinimumVersion=3.0
 description=Geospatial tool for geoprocessing HTP sensor data 
-version=1.1
+version=1.2
 author=Kelly R. Thorp
 email=kelly.thorp@ars.usda.gov
 

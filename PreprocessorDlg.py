@@ -9,7 +9,7 @@ from builtins import range
 import os
 import math
 from . import LatLongUTMconversion
-from qgis.PyQt.QtCore import Qt
+from qgis.PyQt.QtCore import Qt, pyqtSlot
 from qgis.PyQt.QtWidgets import QDialog, QTableWidgetItem, QFileDialog, QMessageBox
 from .Ui_PreprocessorDlg import Ui_PreprocessorDlg
 
@@ -29,7 +29,7 @@ class PreprocessorDlg(QDialog):
                 else:
                     self.ui.tblInstructions.item(i,j).setTextAlignment(Qt.AlignLeft)
 
-    @pyqtSignature("on_btnLoad_clicked()")
+    @pyqtSlot()
     def on_btnLoad_clicked(self):
         file, __ = QFileDialog.getOpenFileName(self,
                                            'Load Instruction File:',
@@ -75,7 +75,7 @@ class PreprocessorDlg(QDialog):
                 else:
                     self.ui.tblInstructions.item(i,j).setTextAlignment(Qt.AlignLeft)
                    
-    @pyqtSignature("on_btnSave_clicked()")
+    @pyqtSlot()
     def on_btnSave_clicked(self):
         file, __ = QFileDialog.getSaveFileName(self,
                                            'Save Instruction File:',
@@ -99,7 +99,7 @@ class PreprocessorDlg(QDialog):
                 f.write(string)
         f.close()
 
-    @pyqtSignature("on_btnRun_clicked()")
+    @pyqtSlot()
     def on_btnRun_clicked(self):
         ret = self.Preprocessor()
 
@@ -108,7 +108,7 @@ class PreprocessorDlg(QDialog):
                             'HTP Geoprocessor',
                             'Finished processing file!')
                 
-    @pyqtSignature("on_btnExit_clicked()")
+    @pyqtSlot()
     def on_btnExit_clicked(self):
         self.close()
 
