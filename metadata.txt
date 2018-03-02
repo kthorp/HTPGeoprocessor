@@ -15,6 +15,7 @@ description=Geospatial tool for geoprocessing HTP sensor data
 version=1.2
 author=Kelly R. Thorp
 email=kelly.thorp@ars.usda.gov
+about=Geospatial tool for geoprocessing high-throughput phenotyping sensor data
 
 # end of mandatory metadata
 
