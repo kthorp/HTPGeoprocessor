@@ -9,7 +9,7 @@ from builtins import range
 import os
 from qgis.PyQt.QtCore import QFileInfo, Qt, QVariant, pyqtSlot
 from qgis.PyQt.QtWidgets import QDialog, QFileDialog, QApplication, QMessageBox 
-from qgis.core import QgsVectorLayer, QgsGeometry, QgsField, QgsFields, QgsPoint
+from qgis.core import QgsVectorLayer, QgsGeometry, QgsField, QgsFields, QgsPointXY
 from qgis.core import QgsFeature, QgsVectorFileWriter
 from .Ui_MapCreatorDlg import Ui_MapCreatorDlg
 
@@ -111,8 +111,8 @@ class MapCreatorDlg(QDialog):
             feat = QgsFeature()
             feat.setFields(flds)
             for i in range(numcoords):
-                hull.append(QgsPoint(float(line[i*2+1]),float(line[i*2+2])))
-            geom = geom.fromMultiPoint(hull)
+                hull.append(QgsPointXY(float(line[i*2+1]),float(line[i*2+2])))
+            geom = geom.fromMultiPointXY(hull)
             geom = geom.convexHull()
             feat.setGeometry(geom)
             feat.setAttribute(header,str(line[0]))
@@ -129,12 +129,14 @@ class MapCreatorDlg(QDialog):
         #Write the output shapefile
         if os.path.exists(self.outputfile):
             QgsVectorFileWriter.deleteShapeFile(self.outputfile)
+        voptions = QgsVectorFileWriter.SaveVectorOptions()
+        voptions.driverName = 'ESRI Shapefile'
+        voptions.fileEncoding = 'utf-8'
         result = QgsVectorFileWriter.writeAsVectorFormat(vlayer, 
                                                          self.outputfile, 
-                                                         'utf-8', 
-                                                         vlayer.crs())
-                
-        if result != QgsVectorFileWriter.NoError:
+                                                         voptions)
+
+        if result[0] != 0:
             QMessageBox.critical(self,'Map Creator','Error creating shapefile.')
         else: #Ask to add shapfile to map
             name = QFileInfo(self.outputfile).completeBaseName()
