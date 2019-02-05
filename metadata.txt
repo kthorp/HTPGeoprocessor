@@ -27,7 +27,7 @@ about=Geospatial tool for geoprocessing high-throughput phenotyping sensor data
 # tags are comma separated with spaces allowed
 tags=
 
-homepage=http://plugins.qgis.org/plugins/htpgeoprocessor/
+homepage=https://github.com/kthorp/HTPGeoprocessor
 tracker=https://github.com/kthorp/HTPGeoprocessor/issues
 repository=https://github.com/kthorp/HTPGeoprocessor
 icon=icon.png
